@@ -24,6 +24,18 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === "complete" && tab.url) analyzeTab(tabId, tab.url);
 });
 
+// Support single-page apps that change the URL without a full page reload.
+chrome.webNavigation.onHistoryStateUpdated.addListener(details => {
+  if (details.frameId === 0) {
+    pageResults.delete(details.tabId);
+    analyzeTab(details.tabId, details.url);
+  }
+});
+
+chrome.webNavigation.onCommitted.addListener(details => {
+  if (details.frameId === 0 && details.url) pageResults.delete(details.tabId);
+});
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === "SCAMLENS_PAGE_INFO" && sender.tab?.id != null) {
     const result = analyzeTab(sender.tab.id, sender.tab.url || message.url, message.page);

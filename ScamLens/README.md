@@ -77,5 +77,6 @@ flowchart TD
 ## 8. 驗證紀錄
 
 - `node --check analyzer.js`、`node --check background.js`、`node --check content.js`、`node --check popup.js`：JavaScript 語法檢查通過。
+- `node tests/analyzer.test.js`：網址同形字、一般網址與一頁式高風險案例測試通過。
 - `python -m json.tool manifest.json`：Manifest JSON 格式檢查通過。
 - 本次版本仍是前端 demo；尚未宣稱經過真實詐騙資料集的準確率驗證。
