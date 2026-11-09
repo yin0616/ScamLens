@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="popup.css" />
+    <title>ScamLens</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="mark">SL</div>
+        <div><h1>ScamLens</h1><p>可解釋的詐騙訊息風險檢測</p></div>
+      </header>
+
+      <section id="page-result" class="page-result hidden" aria-live="polite">
+        <div class="section-heading"><h2>目前網頁</h2><button id="refresh-page" class="secondary small" type="button">重新掃描</button></div>
+        <p id="page-host" class="host"></p>
+        <div class="score-row"><span>自動風險</span><strong id="page-score">0</strong><span id="page-level"></span></div>
+        <ul id="page-signals"></ul>
+      </section>
+
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+
+      <details class="manual-tools">
+        <summary>手動分析訊息（測試用）</summary>
+        <label for="message">貼上訊息、網址或貼文內容</label>
+        <textarea id="message" placeholder="例如：您的帳戶異常，請立即點擊連結驗證…"></textarea>
+        <div class="actions">
+          <button id="analyze">開始分析</button>
+          <button id="sample" class="secondary">填入示範</button>
+          <button id="clear" class="secondary" type="button">清除</button>
+        </div>
+
+        <section id="result" class="hidden" aria-live="polite">
+        <div class="score-row"><span>風險分數</span><strong id="score">0</strong><span id="level"></span></div>
+        <div class="meter"><div id="meter-fill"></div></div>
+        <h2>偵測到的訊號</h2>
+        <ul id="signals"></ul>
+        <button id="copy" class="copy secondary" type="button">複製分析摘要</button>
+        <p class="note">此工具僅做教育與初步風險提示；不會傳送或儲存你的文字。</p>
+        </section>
+      </details>
+    </main>
+    <script src="analyzer.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>
